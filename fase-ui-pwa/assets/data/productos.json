@@ -1,0 +1,299 @@
+{
+ "snacks": [
+  {
+   "id": 101,
+   "titulo": "Papas Fritas XL",
+   "precio": 25,
+   "desc": "Porción gigante con cheddar.",
+   "portada": "https://www.dropbox.com/scl/fi/fose06yrunmoua0huqqb0/comida.jpg?rlkey=4bmf79ee8g0gr4ut2vn2bsttr&st=37qd2yrx&raw=1",
+   "categoria": "Para picar"
+  },
+  {
+   "id": 102,
+   "titulo": "Alitas BBQ",
+   "precio": 45,
+   "desc": "8 piezas bañadas en BBQ.",
+   "portada": "https://www.dropbox.com/scl/fi/fose06yrunmoua0huqqb0/comida.jpg?rlkey=4bmf79ee8g0gr4ut2vn2bsttr&st=37qd2yrx&raw=1",
+   "categoria": "Para picar"
+  },
+  {
+   "id": 103,
+   "titulo": "Nachos",
+   "precio": 35,
+   "desc": "Con queso y jalapeños.",
+   "portada": "https://www.dropbox.com/scl/fi/fose06yrunmoua0huqqb0/comida.jpg?rlkey=4bmf79ee8g0gr4ut2vn2bsttr&st=37qd2yrx&raw=1",
+   "categoria": "Para picar"
+  },
+  {
+   "id": 104,
+   "titulo": "Aros de Cebolla",
+   "precio": 20,
+   "desc": "Crujientes con salsa.",
+   "portada": "https://www.dropbox.com/scl/fi/fose06yrunmoua0huqqb0/comida.jpg?rlkey=4bmf79ee8g0gr4ut2vn2bsttr&st=37qd2yrx&raw=1",
+   "categoria": "Para picar"
+  },
+  {
+   "id": 105,
+   "titulo": "Hamburguesa",
+   "precio": 40,
+   "desc": "Doble carne y queso.",
+   "portada": "https://www.dropbox.com/scl/fi/fose06yrunmoua0huqqb0/comida.jpg?rlkey=4bmf79ee8g0gr4ut2vn2bsttr&st=37qd2yrx&raw=1",
+   "categoria": "Comida"
+  },
+  {
+   "id": 106,
+   "titulo": "Hot Dog",
+   "precio": 20,
+   "desc": "Con papas al hilo.",
+   "portada": "https://www.dropbox.com/scl/fi/fose06yrunmoua0huqqb0/comida.jpg?rlkey=4bmf79ee8g0gr4ut2vn2bsttr&st=37qd2yrx&raw=1",
+   "categoria": "Comida"
+  },
+  {
+   "id": 107,
+   "titulo": "Salchipapas",
+   "precio": 30,
+   "desc": "Salchicha y papas fritas.",
+   "portada": "https://www.dropbox.com/scl/fi/fose06yrunmoua0huqqb0/comida.jpg?rlkey=4bmf79ee8g0gr4ut2vn2bsttr&st=37qd2yrx&raw=1",
+   "categoria": "Comida"
+  },
+  {
+   "id": 108,
+   "titulo": "Pizza Personal",
+   "precio": 50,
+   "desc": "Pepperoni o 4 quesos.",
+   "portada": "https://www.dropbox.com/scl/fi/fose06yrunmoua0huqqb0/comida.jpg?rlkey=4bmf79ee8g0gr4ut2vn2bsttr&st=37qd2yrx&raw=1",
+   "categoria": "Comida"
+  },
+  {
+   "id": 109,
+   "titulo": "Tacos (3 pzs)",
+   "precio": 35,
+   "desc": "Carne, pollo o mixtos.",
+   "portada": "https://www.dropbox.com/scl/fi/fose06yrunmoua0huqqb0/comida.jpg?rlkey=4bmf79ee8g0gr4ut2vn2bsttr&st=37qd2yrx&raw=1",
+   "categoria": "Comida"
+  },
+  {
+   "id": 110,
+   "titulo": "Palomitas de Maiz",
+   "precio": 15,
+   "desc": "Para la mesa.",
+   "portada": "https://www.dropbox.com/scl/fi/fose06yrunmoua0huqqb0/comida.jpg?rlkey=4bmf79ee8g0gr4ut2vn2bsttr&st=37qd2yrx&raw=1",
+   "categoria": "Para picar"
+  },
+  {
+   "id": 111,
+   "titulo": "Nuggets de Pollo (8)",
+   "precio": 30,
+   "desc": "Con salsa a elección.",
+   "portada": "",
+   "categoria": "Para picar"
+  },
+  {
+   "id": 112,
+   "titulo": "Brownie con Helado",
+   "precio": 28,
+   "desc": "Chocolate tibio y helado de vainilla.",
+   "portada": "",
+   "categoria": "Postres"
+  },
+  {
+   "id": 113,
+   "titulo": "Helado Doble",
+   "precio": 15,
+   "desc": "Dos bolas, sabor a elección.",
+   "portada": "",
+   "categoria": "Postres"
+  },
+  {
+   "id": 114,
+   "titulo": "Combo Dúo",
+   "precio": 75,
+   "desc": "Salchipapas + 2 refrescos clásicos.",
+   "portada": "",
+   "categoria": "Combos",
+   "incluye": "1 Salchipapas, 2 Refrescos"
+  },
+  {
+   "id": 115,
+   "titulo": "Combo Barra",
+   "precio": 140,
+   "desc": "Alitas BBQ + nachos + 4 refrescos.",
+   "portada": "",
+   "categoria": "Combos",
+   "incluye": "1 Alitas BBQ, 1 Nachos, 4 Refrescos"
+  },
+  {
+   "id": 116,
+   "titulo": "Combo Cumpleañero",
+   "precio": 210,
+   "desc": "2 pizzas personales, papas XL y 6 refrescos.",
+   "portada": "",
+   "categoria": "Combos",
+   "incluye": "2 Pizzas, 1 Papas XL, 6 Refrescos"
+  }
+ ],
+ "bebidas": [
+  {
+   "id": 201,
+   "titulo": "Refresco Clásico",
+   "precio": 15,
+   "desc": "Vaso 500ml con hielo.",
+   "portada": "https://www.dropbox.com/scl/fi/ul8t2x3zeu8lyuzbrnpkb/images.jpg?rlkey=vqj1a1pdkwaxsgi2i03p4wuqo&st=6gjei293&raw=1",
+   "alcohol": false,
+   "categoria": "Sin alcohol"
+  },
+  {
+   "id": 202,
+   "titulo": "Refresco Sabores",
+   "precio": 15,
+   "desc": "Fresa, piña o cola.",
+   "portada": "https://www.dropbox.com/scl/fi/ul8t2x3zeu8lyuzbrnpkb/images.jpg?rlkey=vqj1a1pdkwaxsgi2i03p4wuqo&st=6gjei293&raw=1",
+   "alcohol": false,
+   "categoria": "Sin alcohol"
+  },
+  {
+   "id": 203,
+   "titulo": "Mojito",
+   "precio": 35,
+   "desc": "Hierbabuena y limón.",
+   "portada": "https://www.dropbox.com/scl/fi/kbx611ewnurtlsi0ig8hh/mojito.jpg?rlkey=51804p7lzbc7spqiqgrjxgmda&st=bz597jdm&raw=1",
+   "alcohol": true,
+   "categoria": "Con alcohol"
+  },
+  {
+   "id": 204,
+   "titulo": "Mojito Fresa",
+   "precio": 38,
+   "desc": "Con fresas naturales.",
+   "portada": "https://www.dropbox.com/scl/fi/kbx611ewnurtlsi0ig8hh/mojito.jpg?rlkey=51804p7lzbc7spqiqgrjxgmda&st=bz597jdm&raw=1",
+   "alcohol": true,
+   "categoria": "Con alcohol"
+  },
+  {
+   "id": 205,
+   "titulo": "Limonada",
+   "precio": 18,
+   "desc": "Hielo frappé.",
+   "portada": "https://www.dropbox.com/scl/fi/ul8t2x3zeu8lyuzbrnpkb/images.jpg?rlkey=vqj1a1pdkwaxsgi2i03p4wuqo&st=6gjei293&raw=1",
+   "alcohol": false,
+   "categoria": "Sin alcohol"
+  },
+  {
+   "id": 206,
+   "titulo": "Té Helado",
+   "precio": 12,
+   "desc": "Durazno.",
+   "portada": "https://www.dropbox.com/scl/fi/ul8t2x3zeu8lyuzbrnpkb/images.jpg?rlkey=vqj1a1pdkwaxsgi2i03p4wuqo&st=6gjei293&raw=1",
+   "alcohol": false,
+   "categoria": "Sin alcohol"
+  },
+  {
+   "id": 207,
+   "titulo": "Agua Mineral",
+   "precio": 10,
+   "desc": "Botella 600ml.",
+   "portada": "https://www.dropbox.com/scl/fi/ul8t2x3zeu8lyuzbrnpkb/images.jpg?rlkey=vqj1a1pdkwaxsgi2i03p4wuqo&st=6gjei293&raw=1",
+   "alcohol": false,
+   "categoria": "Sin alcohol"
+  },
+  {
+   "id": 208,
+   "titulo": "Cerveza",
+   "precio": 25,
+   "desc": "Botella 330ml.",
+   "portada": "https://www.dropbox.com/scl/fi/ul8t2x3zeu8lyuzbrnpkb/images.jpg?rlkey=vqj1a1pdkwaxsgi2i03p4wuqo&st=6gjei293&raw=1",
+   "alcohol": true,
+   "categoria": "Con alcohol"
+  },
+  {
+   "id": 209,
+   "titulo": "Jugo Natural",
+   "precio": 20,
+   "desc": "Naranja o zanahoria.",
+   "portada": "https://www.dropbox.com/scl/fi/ul8t2x3zeu8lyuzbrnpkb/images.jpg?rlkey=vqj1a1pdkwaxsgi2i03p4wuqo&st=6gjei293&raw=1",
+   "alcohol": false,
+   "categoria": "Sin alcohol"
+  },
+  {
+   "id": 210,
+   "titulo": "Café Helado",
+   "precio": 18,
+   "desc": "Con leche.",
+   "portada": "https://www.dropbox.com/scl/fi/ul8t2x3zeu8lyuzbrnpkb/images.jpg?rlkey=vqj1a1pdkwaxsgi2i03p4wuqo&st=6gjei293&raw=1",
+   "alcohol": false,
+   "categoria": "Sin alcohol"
+  },
+  {
+   "id": 211,
+   "titulo": "Mojito sin Alcohol",
+   "precio": 30,
+   "desc": "Hierbabuena, limón y soda.",
+   "portada": "",
+   "categoria": "Sin alcohol",
+   "alcohol": false
+  },
+  {
+   "id": 212,
+   "titulo": "Cerveza Artesanal",
+   "precio": 32,
+   "desc": "Botella 330ml.",
+   "portada": "",
+   "categoria": "Con alcohol",
+   "alcohol": true
+  },
+  {
+   "id": 213,
+   "titulo": "Cerveza 0.0%",
+   "precio": 22,
+   "desc": "Sin alcohol, botella 330ml.",
+   "portada": "",
+   "categoria": "Sin alcohol",
+   "alcohol": false
+  },
+  {
+   "id": 214,
+   "titulo": "Margarita",
+   "precio": 40,
+   "desc": "Tequila, limón y sal.",
+   "portada": "",
+   "categoria": "Con alcohol",
+   "alcohol": true
+  },
+  {
+   "id": 215,
+   "titulo": "Jarra de Limonada",
+   "precio": 45,
+   "desc": "Para compartir (1 litro).",
+   "portada": "",
+   "categoria": "Sin alcohol",
+   "alcohol": false
+  },
+  {
+   "id": 216,
+   "titulo": "Api Morado",
+   "precio": 12,
+   "desc": "Bebida caliente tradicional.",
+   "portada": "",
+   "categoria": "Calientes",
+   "alcohol": false
+  },
+  {
+   "id": 217,
+   "titulo": "Café Americano",
+   "precio": 14,
+   "desc": "Taza caliente.",
+   "portada": "",
+   "categoria": "Calientes",
+   "alcohol": false
+  },
+  {
+   "id": 218,
+   "titulo": "Energizante",
+   "precio": 22,
+   "desc": "Lata 250ml.",
+   "portada": "",
+   "categoria": "Sin alcohol",
+   "alcohol": false
+  }
+ ]
+}
