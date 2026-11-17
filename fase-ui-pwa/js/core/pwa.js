@@ -18,4 +18,14 @@ export function registrarPWA() {
     }
     $(window).off('beforeinstallprompt.pwa').on('beforeinstallprompt.pwa', e => { e.originalEvent.preventDefault(); evtInstalar = e.originalEvent; $('.js-instalar').removeClass('d-none'); });
     $(document).off('click.inst').on('click.inst', '.js-instalar', async () => { if (!evtInstalar) return; evtInstalar.prompt(); await evtInstalar.userChoice; evtInstalar = null; $('.js-instalar').addClass('d-none'); });
+
+    // Avance C3-A2: registro explícito del SW también en 'load' (compatibilidad)
+    // y log del scope para verificar en DevTools que está activo.
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('./sw.js')
+                .then(reg => console.log('[SW] activo en alcance:', reg.scope))
+                .catch(err => console.error('[SW] Error de registro:', err));
+        });
+    }
 }
