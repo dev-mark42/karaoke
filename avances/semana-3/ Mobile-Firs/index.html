@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avance Semana 3 | Componente Encapsulado</title>
+
+    <!-- Estilos del componente -->
+    <link rel="stylesheet" href="css/tarjeta.css">
+
+    <style>
+        /* Estilos de la página de prueba (no del componente) */
+        body { font-family: Arial, sans-serif; background: #1e1e2e; color: #fff; padding: 2rem; }
+        .contenedor-pruebas { display: flex; gap: 20px; flex-wrap: wrap; margin-top: 20px; }
+        header { border-bottom: 1px solid #444; padding-bottom: 1rem; margin-bottom: 1rem; }
+        code { background: #333; padding: 2px 6px; border-radius: 4px; font-family: monospace; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Semana 3: Componente de Tarjeta Encapsulado</h1>
+        <p>Este es un componente aislado. El CSS usa prefijos <code>.card-item_</code> y el JS usa delegación de eventos.</p>
+    </header>
+
+    <!-- Contenedor donde instanciamos el componente 3 veces -->
+    <div class="contenedor-pruebas" id="contenedor-pruebas">
+
+        <!-- Instancia 1 -->
+        <article class="card-item" data-id="101">
+            <h3 class="card-item_titulo">Producto Demo 1</h3>
+            <p class="card-item_estado">Estado: Disponible</p>
+            <button type="button" class="btn-simular">Simular Selección</button>
+        </article>
+
+        <!-- Instancia 2 -->
+        <article class="card-item" data-id="102">
+            <h3 class="card-item_titulo">Producto Demo 2</h3>
+            <p class="card-item_estado">Estado: Disponible</p>
+            <button type="button" class="btn-simular">Simular Selección</button>
+        </article>
+
+        <!-- Instancia 3 -->
+        <article class="card-item" data-id="103">
+            <h3 class="card-item_titulo">Producto Demo 3</h3>
+            <p class="card-item_estado">Estado: Disponible</p>
+            <button type="button" class="btn-simular">Simular Selección</button>
+        </article>
+
+    </div>
+
+    <!-- Script del componente -->
+    <script src="js/tarjeta.js"></script>
+</body>
+</html>
