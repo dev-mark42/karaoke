@@ -3,37 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Avance Semana 3 | Mobile-First, Grid y Flexbox</title>
-
-    <!-- Estilos del componente y del layout -->
-    <link rel="stylesheet" href="css/tarjeta.css">
+    <title>Avance Semana 3 | Parte 2: Grid y Flexbox</title>
     <link rel="stylesheet" href="css/layout.css">
-
     <style>
-        /* Estilos base de la página (no del componente) */
         body { font-family: 'Segoe UI', Arial, sans-serif; background: #0f0a1c; color: #fff; padding: 20px; margin: 0; }
         header { border-bottom: 1px solid #444; padding-bottom: 1rem; margin-bottom: 1rem; }
-        code { background: #2a2a3a; padding: 2px 6px; border-radius: 4px; font-family: monospace; }
         .controles { margin-bottom: 20px; }
     </style>
 </head>
 <body>
-
     <header>
-        <h1>Semana 3: Responsividad con Grid y Flexbox</h1>
-        <p>Redimensiona la ventana para ver cómo el catálogo se adapta. Usa el botón para simular la vista.</p>
+        <h1>Parte 2: Responsividad con Grid y Flexbox</h1>
+        <p>Redimensiona la ventana o usa el botón para simular la vista móvil.</p>
     </header>
 
     <div class="controles">
-        <button type="button" id="btnSimularVista" class="btn-simular" style="width: auto; padding: 10px 20px;">
+        <button type="button" id="btnSimularVista" class="btn-simular" style="width: auto; padding: 10px 20px; background: #444; color: #fff; border: none; border-radius: 8px; cursor: pointer;">
             Simular Vista Móvil / Escritorio
         </button>
     </div>
 
-    <!-- Grid del Catálogo (Mobile-First) -->
     <div class="catalogo-grid" id="grid-catalogo">
-
-        <!-- Instancia 1 -->
         <article class="card-item" data-id="101">
             <div class="card-cuerpo">
                 <h3 class="card-item_titulo">Polera Real Madrid</h3>
@@ -43,7 +33,6 @@
             <button type="button" class="btn-simular">Simular Selección</button>
         </article>
 
-        <!-- Instancia 2 -->
         <article class="card-item" data-id="102">
             <div class="card-cuerpo">
                 <h3 class="card-item_titulo">Polera Barcelona</h3>
@@ -53,7 +42,6 @@
             <button type="button" class="btn-simular">Simular Selección</button>
         </article>
 
-        <!-- Instancia 3 -->
         <article class="card-item" data-id="103">
             <div class="card-cuerpo">
                 <h3 class="card-item_titulo">Polera Boca Juniors</h3>
@@ -62,21 +50,8 @@
             </div>
             <button type="button" class="btn-simular">Simular Selección</button>
         </article>
-
-        <!-- Instancia 4 -->
-        <article class="card-item" data-id="104">
-            <div class="card-cuerpo">
-                <h3 class="card-item_titulo">Polera Manchester City</h3>
-                <p class="card-item_estado">Estado: Disponible</p>
-                <p class="card-precio">Bs. 320</p>
-            </div>
-            <button type="button" class="btn-simular">Simular Selección</button>
-        </article>
-
     </div>
 
-    <!-- Scripts del componente y del layout -->
-    <script src="js/tarjeta.js"></script>
     <script src="js/layout.js"></script>
 </body>
 </html>
