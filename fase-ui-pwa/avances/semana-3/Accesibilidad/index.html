@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avance Semana 4 | Accesibilidad y Contraste</title>
+    <!-- Enlace al CSS de accesibilidad -->
+    <link rel="stylesheet" href="css/accesibilidad.css">
+
+    <style>
+        /* Estilos base para que se vea como tu Karaoke, pero con accesibilidad */
+        body { font-family: 'Segoe UI', Arial, sans-serif; background: #0f0a1c; color: #fff; padding: 20px; margin: 0; transition: background 0.3s, color 0.3s; }
+        .container { max-width: 900px; margin: 0 auto; }
+
+        /* Semántica: Header y Nav */
+        header { border-bottom: 1px solid #444; padding-bottom: 1rem; margin-bottom: 2rem; display: flex; justify-content: space-between; align-items: center; }
+        h1 { font-size: 1.8rem; margin: 0; color: #00ff66; }
+
+        /* Controles de simulación */
+        .controles { margin-bottom: 20px; background: #1e1b2e; padding: 15px; border-radius: 8px; display: flex; gap: 15px; align-items: center; border: 1px solid #333; }
+
+        /* Grilla de Pistas */
+        .grilla-pistas { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; }
+
+        /* Etiquetas de formulario accesibles */
+        .grupo-campo { display: flex; flex-direction: column; gap: 5px; margin-bottom: 15px; }
+        label { font-weight: 600; font-size: 0.9rem; }
+        input, select { padding: 10px; border-radius: 6px; border: 1px solid #444; background: #2a2a3a; color: #fff; font-size: 1rem; }
+        input:focus, select:focus { outline: 3px solid #00ff66; outline-offset: 2px; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- 1. HTML Semántico: Header y Nav -->
+        <header>
+            <h1>🎤 Karaoke UPDS</h1>
+            <nav aria-label="Navegación principal">
+                <a href="#" style="color: #fff; margin-right: 15px;">Inicio</a>
+                <a href="#" style="color: #fff;">Reservas</a>
+            </nav>
+        </header>
+
+        <!-- 2. Controles de Accesibilidad (Simulación) -->
+        <section class="controles" aria-label="Herramientas de accesibilidad">
+            <button type="button" id="btnSimularContraste" style="padding: 10px 20px; background: #00ff66; border: none; border-radius: 6px; font-weight: bold; cursor: pointer;">
+                Simular Alto Contraste (WCAG)
+            </button>
+            <span style="font-size: 0.9rem; color: #aaa;">Prueba el botón y navega con la tecla Tab.</span>
+        </section>
+
+        <!-- 3. Formulario Semántico con Labels vinculados -->
+        <section aria-labelledby="titulo-reserva">
+            <h2 id="titulo-reserva" style="margin-bottom: 15px;">Datos de Reserva</h2>
+            <form action="#" method="POST">
+                <div class="grupo-campo">
+                    <!-- Asociación for / id -->
+                    <label for="nombreCliente">Nombre del Cliente:</label>
+                    <input type="text" id="nombreCliente" name="nombreCliente" placeholder="Ej. Alex" required aria-required="true">
+                </div>
+                <div class="grupo-campo">
+                    <label for="salaSelect">Seleccionar Sala:</label>
+                    <select id="salaSelect" name="sala">
+                        <option value="vip">Sala VIP</option>
+                        <option value="familiar">Sala Familiar</option>
+                    </select>
+                </div>
+                <button type="submit" style="padding: 12px 24px; background: #00ff66; color: #000; border: none; border-radius: 6px; font-weight: bold; cursor: pointer;">
+                    Confirmar Reserva
+                </button>
+            </form>
+        </section>
+
+        <!-- 4. Tarjetas con Semántica, Alt y Focus -->
+        <section aria-labelledby="titulo-pistas" style="margin-top: 40px;">
+            <h2 id="titulo-pistas" style="margin-bottom: 15px;">Pistas Disponibles</h2>
+            <div class="grilla-pistas">
+                <!-- Article semántico -->
+                <article class="pista-card" tabindex="0" style="background: #1e1b2e; padding: 15px; border-radius: 8px; border: 1px solid #444;">
+                    <img src="https://www.dropbox.com/scl/fi/8xci9xpaz51ha8sb30wbg/472c015c2501fb992270625f50b32ae7.jpg?rlkey=k33ejmcr64xvtk83zv6hgtfiw&st=y9ol3wwu&raw=1"
+                         alt="Portada de la canción As It Was de Harry Styles"
+                         style="width: 100%; height: 150px; object-fit: cover; border-radius: 6px;">
+                    <h3 style="margin: 10px 0 5px; font-size: 1.1rem;">As It Was</h3>
+                    <p style="margin: 0; color: #aaa; font-size: 0.9rem;">Harry Styles</p>
+                    <!-- Botón real, no un div -->
+                    <button type="button" style="margin-top: 15px; width: 100%; padding: 10px; background: transparent; border: 1px solid #00ff66; color: #00ff66; border-radius: 6px; cursor: pointer;" aria-label="Agregar As It Was a la cola de karaoke">
+                        + Agregar a la Cola
+                    </button>
+                </article>
+
+                <article class="pista-card" tabindex="0" style="background: #1e1b2e; padding: 15px; border-radius: 8px; border: 1px solid #444;">
+                    <img src="https://www.dropbox.com/scl/fi/8xci9xpaz51ha8sb30wbg/472c015c2501fb992270625f50b32ae7.jpg?rlkey=k33ejmcr64xvtk83zv6hgtfiw&st=y9ol3wwu&raw=1"
+                         alt="Portada de la canción Watermelon Sugar de Harry Styles"
+                         style="width: 100%; height: 150px; object-fit: cover; border-radius: 6px;">
+                    <h3 style="margin: 10px 0 5px; font-size: 1.1rem;">Watermelon Sugar</h3>
+                    <p style="margin: 0; color: #aaa; font-size: 0.9rem;">Harry Styles</p>
+                    <button type="button" style="margin-top: 15px; width: 100%; padding: 10px; background: transparent; border: 1px solid #00ff66; color: #00ff66; border-radius: 6px; cursor: pointer;" aria-label="Agregar Watermelon Sugar a la cola de karaoke">
+                        + Agregar a la Cola
+                    </button>
+                </article>
+            </div>
+        </section>
+    </div>
+
+    <!-- 5. Enlace al JS de accesibilidad -->
+    <script src="js/accesibilidad.js"></script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+/* =========================================
+   ACCESIBILIDAD (a11y) - WCAG y Foco
+   ========================================= */
+
+/* 1. Foco Visible (:focus-visible) */
+:focus-visible {
+    outline: 3px solid #00ff66; /* Color verde neón para que resalte */
+    outline-offset: 3px;
+    border-radius: 4px;
+}
+
+/* Quitar el outline por defecto a los clics con mouse (solo mostrar en teclado) */
+:focus:not(:focus-visible) {
+    outline: none;
+}
+
+/* 2. Modo Alto Contraste (Simulación WCAG) */
+body.alto-contraste {
+    background-color: #000000 !important;
+    color: #ffffff !important;
+}
+
+/* Forzar bordes y colores de alto contraste en todos los elementos */
+body.alto-contraste header,
+body.alto-contraste .controles,
+body.alto-contraste .pista-card,
+body.alto-contraste input,
+body.alto-contraste select {
+    border-color: #facc15 !important; /* Amarillo de alto contraste */
+    background-color: #111827 !important;
+    color: #ffffff !important;
+}
+
+body.alto-contraste h1,
+body.alto-contraste h2,
+body.alto-contraste h3,
+body.alto-contraste p,
+body.alto-contraste a,
+body.alto-contraste span,
+body.alto-contraste label {
+    color: #ffffff !important;
+}
+
+/* Ajuste de botones en alto contraste */
+body.alto-contraste button {
+    background-color: #facc15 !important; /* Botones amarillos */
+    color: #000000 !important;
+    border: 2px solid #ffffff !important;
+}
+
+body.alto-contraste button:hover {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+}
+
+/* Ajuste de imágenes para no perder el foco */
+body.alto-contraste img {
+    border: 2px solid #facc15 !important;
+}
