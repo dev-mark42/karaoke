@@ -31,14 +31,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // 5. Construir el mensaje de salida
         let mensaje = `Resultados del Smoke Test:\n`;
-        mensaje += `✅ Botones: ${botones} | `;
-        mensaje += `✅ Secciones/Artículos: ${secciones} | `;
-        mensaje += `${imagenesSinAlt === 0 ? '✅' : '❌'} Imágenes sin alt: ${imagenesSinAlt} | `;
-        mensaje += `${enlacesVacios === 0 ? '✅' : '❌'} Enlaces vacíos: ${enlacesVacios}`;
+        mensaje += `Botones: ${botones} | `;
+        mensaje += ` Secciones/Artículos: ${secciones} | `;
+        mensaje += `${imagenesSinAlt === 0 ? '' : '❌'} Imágenes sin alt: ${imagenesSinAlt} | `;
+        mensaje += `${enlacesVacios === 0 ? '' : '❌'} Enlaces vacíos: ${enlacesVacios}`;
 
         // 6. Lógica de colores según el resultado
         if (imagenesSinAlt === 0 && enlacesVacios === 0) {
-            salidaAudit.textContent = mensaje + `\n🎉 ¡Todo correcto! Puedes desplegar con seguridad.`;
+            salidaAudit.textContent = mensaje + `\n ¡Todo correcto! Puedes desplegar con seguridad.`;
             salidaAudit.classList.add('success');
         } else if (imagenesSinAlt > 0 || enlacesVacios > 0) {
             salidaAudit.textContent = mensaje + `\n⚠️ Revisa los elementos marcados en rojo antes de desplegar.`;
