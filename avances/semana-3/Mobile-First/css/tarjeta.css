@@ -1,0 +1,55 @@
+/* =========================================
+   COMPONENTE: TARJETA (AISLADA)
+   ========================================= */
+.card-item {
+    background-color: #2a2a3a;
+    border: 2px solid #444;
+    border-radius: 12px;
+    padding: 20px;
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.card-item--activo {
+    border-color: #00ff66;
+    box-shadow: 0 0 15px rgba(0, 255, 102, 0.3);
+    background-color: #1e2e24;
+}
+
+.card-item_titulo {
+    margin: 0;
+    font-size: 1.2rem;
+    color: #fff;
+    font-weight: bold;
+}
+
+.card-item_estado {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #aaa;
+    font-style: italic;
+}
+
+.btn-simular {
+    background-color: #444;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.2s;
+    margin-top: auto;
+}
+
+.btn-simular:hover { background-color: #555; }
+
+.card-item--activo .btn-simular {
+    background-color: #00ff66;
+    color: #000;
+}
+.card-item--activo .btn-simular:hover { background-color: #00cc52; }

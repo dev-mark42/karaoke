@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, interactive-widget=resizes-content">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://code.jquery.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://esm.sh; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com https://unpkg.com; font-src 'self' data: https://fonts.gstatic.com https://unpkg.com; img-src 'self' data: blob: https:; media-src 'self' blob: https:; connect-src 'self' https://*.supabase.co wss://*.supabase.co https://esm.sh; manifest-src 'self'; worker-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
+    <meta name="description" content="Reserva tu sala de karaoke, elige tus pistas, pide comida y bebidas y paga en efectivo, QR o tarjeta.">
+    <meta name="theme-color" content="#0d061f">
+    <title>Karaoke UPDS | Reservas, pistas y experiencias</title>
+    <link rel="manifest" href="./manifest.json">
+    <link rel="icon" type="image/png" href="assets/img/logo.png">
+    <link rel="apple-touch-icon" href="assets/img/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+    <a class="skip-link" href="#contenido">Saltar al contenido</a>
+    <div class="bg-aurora" aria-hidden="true"><i></i><i></i><i></i></div>
+
+    <!-- NAVBAR WEB (laptop) -->
+    <nav class="navbar fixed-top glass-nav d-none d-lg-flex justify-content-between px-4" aria-label="Navegación principal">
+        <a class="navbar-brand fw-bold text-gradient" href="#reserva"><img src="assets/img/logo.png" alt="" width="32" height="32" class="me-2 logo-nav">Karaoke UPDS POS</a>
+        <div class="d-flex gap-3">
+            <a href="#reserva" class="nav-link-web active" data-target="view-reserva"><i class="ph ph-receipt" aria-hidden="true"></i> Reserva</a>
+            <a href="#pistas" class="nav-link-web" data-target="view-pistas"><i class="ph ph-music-notes" aria-hidden="true"></i> Pistas</a>
+            <a href="#snacks" class="nav-link-web" data-target="view-snacks"><i class="ph ph-pizza" aria-hidden="true"></i> Snacks</a>
+            <a href="#bebidas" class="nav-link-web" data-target="view-bebidas"><i class="ph ph-wine" aria-hidden="true"></i> Bebidas</a>
+            <a href="#historial" class="nav-link-web" data-target="view-historial"><i class="ph ph-list-checks" aria-hidden="true"></i> Mis reservas</a>
+        </div>
+        <div class="d-flex align-items-center gap-2">
+            <button type="button" class="btn btn-sm btn-outline-info js-instalar d-none"><i class="ph ph-download-simple" aria-hidden="true"></i> Instalar</button>
+            <span class="estado-red js-estado-red online" role="status"></span>
+        </div>
+    </nav>
+    <!-- NAVBAR PWA (celular / tablet) -->
+    <nav class="navbar fixed-top glass-nav d-flex d-lg-none justify-content-between px-3" aria-label="Barra superior">
+        <a class="navbar-brand fw-bold text-gradient" href="#reserva"><img src="assets/img/logo.png" alt="" width="30" height="30" class="me-2 logo-nav">Karaoke UPDS</a>
+        <div class="d-flex align-items-center gap-2">
+            <button type="button" class="btn btn-sm btn-outline-info js-instalar d-none" aria-label="Instalar aplicación"><i class="ph ph-download-simple" aria-hidden="true"></i></button>
+            <span class="estado-red js-estado-red online" role="status"></span>
+        </div>
+    </nav>
+
+    <main id="contenido" class="app-container container-fluid px-md-4">
+        <div class="alert alert-danger d-none js-error-carga" role="alert">No se pudo cargar el catálogo. Revisa tu conexión. <button type="button" class="btn btn-sm btn-light ms-2 js-reintentar">Reintentar</button></div>
+
+        <!-- ========== RESERVA ========== -->
+        <section id="view-reserva" class="app-view active" aria-labelledby="t-reserva">
+            <div class="row g-3">
+                <div class="col-lg-5">
+                    <div class="glass-card p-3 p-md-4 h-100">
+                        <h1 id="t-reserva" class="h5 text-gradient mb-3 fw-bold view-titulo"><i class="ph ph-receipt" aria-hidden="true"></i> Datos de Reserva</h1>
+                        <form id="formReserva" novalidate autocomplete="on">
+                            <div class="row g-3">
+                                <div class="col-12"><label for="clienteNombre" class="form-label">Nombre del cliente *</label><input type="text" id="clienteNombre" class="form-control campo" placeholder="Ej. Alex Rojas" maxlength="40" autocomplete="name" required></div>
+                                <div class="col-6"><label for="clienteTel" class="form-label">Celular *</label><input type="tel" id="clienteTel" class="form-control campo" placeholder="71234567" inputmode="numeric" maxlength="8" autocomplete="tel-national" required></div>
+                                <div class="col-6"><label for="clienteEmail" class="form-label">Correo (opcional)</label><input type="email" id="clienteEmail" class="form-control campo" placeholder="tu@correo.com" maxlength="80" autocomplete="email"></div>
+                                <div class="col-12"><label for="salaSelect" class="form-label">Sala *</label><select id="salaSelect" class="form-select campo"></select><small id="infoSala" class="text-muted-k d-block mt-1"></small></div>
+                                <div class="col-6"><label for="fechaReserva" class="form-label">Fecha *</label><input type="date" id="fechaReserva" class="form-control campo" required></div>
+                                <div class="col-6"><label for="horaReserva" class="form-label">Hora de inicio *</label><select id="horaReserva" class="form-select campo" required></select></div>
+                                <div class="col-6"><label for="duracionReserva" class="form-label">Duración *</label><select id="duracionReserva" class="form-select campo"></select></div>
+                                <div class="col-6"><label for="personas" class="form-label">Personas *</label><input type="number" id="personas" class="form-control campo" min="1" max="15" value="2" inputmode="numeric" required></div>
+                                <div class="col-12"><label for="ocasion" class="form-label">Ocasión</label><select id="ocasion" class="form-select campo"></select></div>
+                                <div class="col-12"><label for="notas" class="form-label d-flex justify-content-between">Notas para el personal <span id="notasCont" class="text-muted-k">0/200</span></label><textarea id="notas" class="form-control campo" rows="2" maxlength="200" placeholder="Ej. Decoración de cumpleaños, pastel propio..."></textarea></div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-lg-7 d-flex flex-column gap-3">
+                    <div class="glass-card p-3 p-md-4">
+                        <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-2"><h2 class="h6 fw-bold m-0"><i class="ph ph-calendar-check text-gradient" aria-hidden="true"></i> Disponibilidad</h2><small id="dispFecha" class="text-muted-k"></small></div>
+                        <div class="disp-scroll"><div id="gridDisponibilidad"></div></div>
+                        <div class="leyenda small text-muted-k mt-2"><span><i class="slot libre"></i> Libre</span><span><i class="slot ocupado"></i> Ocupado</span><span><i class="slot pasado"></i> Pasado</span></div>
+                    </div>
+                    <div class="glass-card p-3 p-md-4">
+                        <h2 class="h6 fw-bold mb-3"><i class="ph ph-shopping-cart text-gradient" aria-hidden="true"></i> Resumen del pedido</h2>
+                        <div id="resumenPrincipal" class="js-resumen"></div>
+                        <div class="d-flex gap-2 mt-3">
+                            <button type="button" class="btn btn-outline-light js-vaciar" aria-label="Vaciar pedido"><i class="ph ph-trash" aria-hidden="true"></i></button>
+                            <button type="button" id="btnConfirmar" class="btn btn-gradient flex-grow-1 py-3 fw-bold js-confirmar"><i class="ph ph-check-circle fs-5" aria-hidden="true"></i> Confirmar Reserva</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row g-3 mt-1" aria-label="Compromiso con los Objetivos de Desarrollo Sostenible">
+                <div class="col-12"><h2 class="h6 fw-bold text-muted-k mb-0">Compromiso ODS</h2></div>
+                <div class="col-md-4"><div class="ods-card ods3"><i class="ph ph-heartbeat" aria-hidden="true"></i><div><b>ODS 3 · Salud y bienestar</b><p>Bebidas sin alcohol, verificación 18+ y consumo responsable.</p></div></div></div>
+                <div class="col-md-4"><div class="ods-card ods12"><i class="ph ph-leaf" aria-hidden="true"></i><div><b>ODS 12 · Consumo responsable</b><p>Ticket digital con QR: cero papel y pedidos a la medida.</p></div></div></div>
+                <div class="col-md-4"><div class="ods-card ods9"><i class="ph ph-cpu" aria-hidden="true"></i><div><b>ODS 9 · Innovación</b><p>PWA instalable que funciona sin conexión.</p></div></div></div>
+            </div>
+        </section>
+
+        <!-- ========== PISTAS ========== -->
+        <section id="view-pistas" class="app-view" aria-labelledby="t-pistas">
+            <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
+                <h1 id="t-pistas" class="h5 text-white fw-bold m-0 view-titulo"><i class="ph ph-music-notes text-gradient" aria-hidden="true"></i> Catálogo Musical <small id="contPistas" class="text-muted-k fs-6 ms-1"></small></h1>
+                <div class="d-flex gap-2"><button type="button" id="btnAleatorio" class="btn btn-outline-light btn-sm"><i class="ph ph-shuffle" aria-hidden="true"></i> Sorpréndeme</button><button type="button" id="btnMic" class="btn btn-outline-info btn-sm"><i class="ph ph-microphone" aria-hidden="true"></i> Probar micrófono</button></div>
+            </div>
+            <div class="row g-2 mb-2">
+                <div class="col-12 col-md-5"><label for="buscadorPistas" class="visually-hidden">Buscar canción o artista</label><div class="input-icon"><i class="ph ph-magnifying-glass" aria-hidden="true"></i><input type="search" id="buscadorPistas" class="form-control campo" placeholder="Buscar canción, artista o género..." maxlength="60" autocomplete="off"></div></div>
+                <div class="col-6 col-md-3"><label for="selArtista" class="visually-hidden">Artista</label><select id="selArtista" class="form-select campo"></select></div>
+                <div class="col-6 col-md-2"><label for="selOrden" class="visually-hidden">Ordenar</label><select id="selOrden" class="form-select campo"><option value="catalogo">Catálogo</option><option value="az">A – Z</option><option value="artista">Artista</option><option value="genero">Género</option><option value="nuevas">Recientes</option></select></div>
+                <div class="col-12 col-md-2 d-flex align-items-center"><div class="form-check form-switch m-0"><input class="form-check-input" type="checkbox" role="switch" id="chkFavs"><label class="form-check-label" for="chkFavs">Solo favoritas</label></div></div>
+            </div>
+            <div class="chips mb-3" id="filtrosGenero" role="group" aria-label="Filtrar por género"></div>
+            <div id="catalogoKaraoke" class="grid-cards"></div>
+            <div id="vacioPistas" class="vacio d-none"><i class="ph ph-music-notes-simple" aria-hidden="true"></i><p>No encontramos pistas con esos filtros.</p><button type="button" id="btnLimpiarPistas" class="btn btn-outline-light btn-sm">Limpiar filtros</button></div>
+            <div id="centinelaPistas" class="centinela" aria-hidden="true"></div>
+            <div class="text-center my-3"><button type="button" id="btnMasPistas" class="btn btn-outline-light d-none">Ver más pistas</button></div>
+        </section>
+
+        <!-- ========== SNACKS ========== -->
+        <section id="view-snacks" class="app-view" aria-labelledby="t-snacks">
+            <div class="d-flex justify-content-between align-items-center mb-3"><h1 id="t-snacks" class="h5 text-white fw-bold m-0 view-titulo"><i class="ph ph-pizza text-gradient" aria-hidden="true"></i> Snacks y Combos <small id="contSnacks" class="text-muted-k fs-6 ms-1"></small></h1></div>
+            <div class="row g-2 mb-2"><div class="col-8"><label for="buscadorSnacks" class="visually-hidden">Buscar snack</label><div class="input-icon"><i class="ph ph-magnifying-glass" aria-hidden="true"></i><input type="search" id="buscadorSnacks" class="form-control campo" placeholder="Buscar snack..." maxlength="60" autocomplete="off"></div></div>
+                <div class="col-4"><label for="ordenSnacks" class="visually-hidden">Ordenar</label><select id="ordenSnacks" class="form-select campo"><option value="catalogo">Menú</option><option value="precio-asc">Precio ↑</option><option value="precio-desc">Precio ↓</option><option value="az">A – Z</option></select></div></div>
+            <div class="chips mb-3" id="filtrosSnacks" role="group" aria-label="Categorías de snacks"></div>
+            <div id="catalogoSnacks" class="grid-cards"></div>
+            <div id="vacioSnacks" class="vacio d-none"><i class="ph ph-bowl-food" aria-hidden="true"></i><p>No hay productos con esa búsqueda.</p></div>
+        </section>
+
+        <!-- ========== BEBIDAS ========== -->
+        <section id="view-bebidas" class="app-view" aria-labelledby="t-bebidas">
+            <div class="d-flex justify-content-between align-items-center mb-3"><h1 id="t-bebidas" class="h5 text-white fw-bold m-0 view-titulo"><i class="ph ph-wine text-gradient" aria-hidden="true"></i> Bebidas <small id="contBebidas" class="text-muted-k fs-6 ms-1"></small></h1></div>
+            <div class="row g-2 mb-2"><div class="col-8"><label for="buscadorBebidas" class="visually-hidden">Buscar bebida</label><div class="input-icon"><i class="ph ph-magnifying-glass" aria-hidden="true"></i><input type="search" id="buscadorBebidas" class="form-control campo" placeholder="Buscar bebida..." maxlength="60" autocomplete="off"></div></div>
+                <div class="col-4"><label for="ordenBebidas" class="visually-hidden">Ordenar</label><select id="ordenBebidas" class="form-select campo"><option value="catalogo">Menú</option><option value="precio-asc">Precio ↑</option><option value="precio-desc">Precio ↓</option><option value="az">A – Z</option></select></div></div>
+            <div class="chips mb-2" id="filtrosBebidas" role="group" aria-label="Categorías de bebidas"></div>
+            <p class="small text-muted-k"><i class="ph ph-warning" aria-hidden="true"></i> Las bebidas con alcohol (18+) requieren confirmar mayoría de edad. Consume con responsabilidad.</p>
+            <div id="catalogoBebidas" class="grid-cards"></div>
+            <div id="vacioBebidas" class="vacio d-none"><i class="ph ph-wine" aria-hidden="true"></i><p>No hay bebidas con esa búsqueda.</p></div>
+        </section>
+
+        <!-- ========== MIS RESERVAS ========== -->
+        <section id="view-historial" class="app-view" aria-labelledby="t-hist">
+            <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
+                <h1 id="t-hist" class="h5 text-white fw-bold m-0 view-titulo"><i class="ph ph-list-checks text-gradient" aria-hidden="true"></i> Mis reservas</h1>
+                <div class="d-flex gap-2"><button type="button" id="btnExportar" class="btn btn-outline-light btn-sm"><i class="ph ph-download-simple" aria-hidden="true"></i> Exportar CSV</button><button type="button" id="btnLimpiarHist" class="btn btn-outline-danger btn-sm"><i class="ph ph-trash" aria-hidden="true"></i> Limpiar</button></div>
+            </div>
+            <div class="row g-2 mb-3" id="statsHistorial"></div>
+            <div class="mb-2"><label for="buscadorHistorial" class="visually-hidden">Buscar reserva</label><div class="input-icon"><i class="ph ph-magnifying-glass" aria-hidden="true"></i><input type="search" id="buscadorHistorial" class="form-control campo" placeholder="Buscar por código, cliente o sala..." maxlength="60" autocomplete="off"></div></div>
+            <div class="chips mb-3" id="filtrosHistorial" role="group" aria-label="Filtrar por estado"></div>
+            <div id="listaHistorial" class="lista-res"></div>
+            <div id="vacioHistorial" class="vacio d-none"><i class="ph ph-ticket" aria-hidden="true"></i><p>Aún no tienes reservas. ¡Crea la primera!</p><button type="button" class="btn btn-gradient btn-sm js-ir" data-target="view-reserva">Reservar ahora</button></div>
+        </section>
+    </main>
+
+    <!-- BOTÓN FLOTANTE DEL PEDIDO -->
+    <button type="button" id="fabPedido" class="fab" data-bs-toggle="offcanvas" data-bs-target="#offcanvasPedido" aria-controls="offcanvasPedido" aria-label="Abrir mi pedido">
+        <i class="ph ph-shopping-cart fs-4" aria-hidden="true"></i><span class="fab-txt js-fab-total">Bs 0</span><span class="badge-count js-contador d-none">0</span>
+    </button>
+    <div class="offcanvas offcanvas-end glass-modal" tabindex="-1" id="offcanvasPedido" aria-labelledby="ocTitulo">
+        <div class="offcanvas-header"><h2 class="h5 fw-bold m-0" id="ocTitulo"><i class="ph ph-shopping-cart text-gradient" aria-hidden="true"></i> Mi pedido</h2><button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Cerrar"></button></div>
+        <div class="offcanvas-body d-flex flex-column"><div id="resumenOffcanvas" class="js-resumen flex-grow-1"></div>
+            <div class="d-flex gap-2 mt-3"><button type="button" class="btn btn-outline-light js-vaciar" aria-label="Vaciar pedido"><i class="ph ph-trash" aria-hidden="true"></i></button><button type="button" class="btn btn-gradient flex-grow-1 py-3 fw-bold js-confirmar"><i class="ph ph-check-circle fs-5" aria-hidden="true"></i> Confirmar Reserva</button></div></div>
+    </div>
+
+    <!-- MENÚ INFERIOR (celular / tablet) -->
+    <nav class="bottom-nav d-flex d-lg-none" aria-label="Navegación inferior">
+        <a href="#reserva" class="nav-item active" data-target="view-reserva"><i class="ph ph-receipt" aria-hidden="true"></i><span>Reserva</span></a>
+        <a href="#pistas" class="nav-item" data-target="view-pistas"><i class="ph ph-music-notes" aria-hidden="true"></i><span>Pistas</span></a>
+        <a href="#snacks" class="nav-item" data-target="view-snacks"><i class="ph ph-pizza" aria-hidden="true"></i><span>Snacks</span></a>
+        <a href="#bebidas" class="nav-item" data-target="view-bebidas"><i class="ph ph-wine" aria-hidden="true"></i><span>Bebidas</span></a>
+        <a href="#historial" class="nav-item" data-target="view-historial"><i class="ph ph-list-checks" aria-hidden="true"></i><span>Reservas</span></a>
+    </nav>
+
+    <!-- MODAL PISTA (disco giratorio) -->
+    <div class="modal fade" id="modalPista" tabindex="-1" aria-labelledby="pistaTitulo" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable"><div class="modal-content glass-modal karaoke-bg text-center p-3 p-md-4">
+            <button type="button" class="btn-close btn-close-white position-absolute top-0 end-0 m-3" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            <div class="vinyl-scene mx-auto mb-3"><div class="vinyl-wrapper"><div class="vinyl-disc"></div><img id="pistaImgHD" src="" alt="Portada" class="vinyl-cover" width="96" height="96"></div><div class="tonearm" aria-hidden="true"></div></div>
+            <div class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+            <h2 class="h4 text-white mb-1 fw-bold" id="pistaTitulo">Título</h2>
+            <p class="text-gradient mb-0 fw-bold" id="pistaArtista">Artista</p><p class="small text-muted-k mb-1" id="pistaMeta"></p><p class="small text-muted-k mb-2" id="pistaPos"></p>
+            <div class="letra-container mb-3 p-3 rounded-3 text-center" tabindex="0" aria-label="Letra"><div id="pistaLetra"></div></div>
+            <div class="d-flex gap-2 mb-2">
+                <button type="button" id="btnPrevPista" class="btn btn-outline-light" aria-label="Pista anterior"><i class="ph ph-skip-back" aria-hidden="true"></i></button>
+                <button type="button" id="btnGirar" class="btn btn-outline-light flex-grow-1" aria-pressed="true"><i class="ph ph-pause" aria-hidden="true"></i> Pausar</button>
+                <button type="button" id="btnFavPista" class="btn btn-outline-light btn-fav-modal" aria-label="Favorita" aria-pressed="false"><i class="ph ph-heart" aria-hidden="true"></i></button>
+                <button type="button" id="btnNextPista" class="btn btn-outline-light" aria-label="Pista siguiente"><i class="ph ph-skip-forward" aria-hidden="true"></i></button>
+            </div>
+            <button type="button" class="btn btn-gradient w-100 py-2 fw-bold" id="btnAgregarPista"><i class="ph ph-plus-circle fs-5" aria-hidden="true"></i> Agregar a la cola</button>
+        </div></div>
+    </div>
+
+    <!-- MODAL PRUEBA DE MICRÓFONO -->
+    <div class="modal fade" id="modalMic" tabindex="-1" aria-labelledby="micTitulo" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered"><div class="modal-content glass-modal p-4 text-center">
+            <button type="button" class="btn-close btn-close-white position-absolute top-0 end-0 m-3" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            <h2 class="h5 fw-bold" id="micTitulo"><i class="ph ph-microphone-stage text-gradient" aria-hidden="true"></i> Prueba de micrófono</h2>
+            <p class="text-muted-k small">Verifica tu voz antes de cantar. El audio no se graba ni se envía.</p>
+            <canvas id="micCanvas" width="320" height="110" class="w-100 mic-canvas" role="img" aria-label="Nivel de audio"></canvas>
+            <p id="micNivel" class="small my-2" role="status">Pulsa iniciar y habla.</p><div id="micError" class="alert alert-warning py-2 small d-none" role="alert"></div>
+            <button type="button" id="btnMicToggle" class="btn btn-gradient w-100"><i class="ph ph-microphone" aria-hidden="true"></i> Iniciar prueba</button>
+        </div></div>
+    </div>
+
+    <!-- MODAL PRODUCTO -->
+    <div class="modal fade" id="modalProducto" tabindex="-1" aria-labelledby="prodTitulo" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable"><div class="modal-content glass-modal p-0 overflow-hidden border-0">
+            <button type="button" class="btn-close btn-close-white position-absolute top-0 end-0 m-3 z-3" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            <div class="row g-0">
+                <div class="col-md-6 bg-black d-flex justify-content-center align-items-center"><img id="prodImg" src="" alt="" class="prod-zoom" width="400" height="400"></div>
+                <div class="col-md-6 p-4 d-flex flex-column">
+                    <span class="badge bg-secondary align-self-start mb-2" id="prodCategoria"></span>
+                    <h2 class="h3 text-white fw-bold mb-1" id="prodTitulo">Producto</h2>
+                    <p class="h4 text-warning fw-bold mb-2" id="prodPrecio">Bs 0</p>
+                    <p class="text-muted-k mb-2" id="prodDesc"></p><p class="small text-info d-none" id="prodIncluye"></p>
+                    <p class="small text-warning d-none" id="prodAlcohol"><i class="ph ph-warning" aria-hidden="true"></i> Contiene alcohol. Solo mayores de 18 años.</p>
+                    <div class="d-flex align-items-center justify-content-between my-3"><span class="fw-semibold">Cantidad</span>
+                        <div class="stepper stepper-lg"><button type="button" id="btnQtyMenos" class="btn-ic" aria-label="Menos"><i class="ph ph-minus" aria-hidden="true"></i></button><b id="prodQty" aria-live="polite">1</b><button type="button" id="btnQtyMas" class="btn-ic" aria-label="Más"><i class="ph ph-plus" aria-hidden="true"></i></button></div></div>
+                    <button type="button" class="btn btn-gradient w-100 py-3 fw-bold mt-auto" id="btnAgregarProd"><i class="ph ph-plus-circle" aria-hidden="true"></i> Agregar · <span id="prodSubtotal">Bs 0</span></button>
+                </div>
+            </div>
+        </div></div>
+    </div>
+
+    <!-- MODAL PAGO -->
+    <div class="modal fade" id="modalPago" tabindex="-1" aria-labelledby="pagoTitulo" aria-hidden="true" data-bs-backdrop="static">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable"><div class="modal-content glass-modal">
+            <div class="modal-header border-secondary"><h2 class="h5 fw-bold m-0" id="pagoTitulo"><i class="ph ph-wallet text-gradient" aria-hidden="true"></i> Pago de la reserva</h2><button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button></div>
+            <div class="modal-body">
+                <div class="pago-total"><small class="text-muted-k" id="pagoResumenMini"></small><div class="display-6 fw-bold" id="pagoTotal">Bs 0</div></div>
+                <div class="metodos" role="radiogroup" aria-label="Método de pago">
+                    <label class="metodo-card sel"><input type="radio" name="metodoPago" id="mp-efectivo" value="efectivo" checked><i class="ph ph-money" aria-hidden="true"></i><span>Efectivo</span></label>
+                    <label class="metodo-card"><input type="radio" name="metodoPago" id="mp-qr" value="qr"><i class="ph ph-qr-code" aria-hidden="true"></i><span>QR</span></label>
+                    <label class="metodo-card"><input type="radio" name="metodoPago" id="mp-tarjeta" value="tarjeta"><i class="ph ph-credit-card" aria-hidden="true"></i><span>Tarjeta</span></label>
+                </div>
+
+                <div id="panel-efectivo" class="panel-pago">
+                    <div class="aviso"><i class="ph ph-info" aria-hidden="true"></i> Pagas en caja al llegar. Tu reserva se mantiene hasta 15 min después de la hora de inicio; si no te presentas, se cancela automáticamente.</div>
+                    <label for="efectivoPagoCon" class="form-label">¿Con cuánto pagarás? (opcional)</label><input type="text" id="efectivoPagoCon" class="form-control campo" inputmode="decimal" placeholder="Ej. 200" autocomplete="off"><small id="efectivoCambio" class="text-muted-k d-block mt-1" role="status"></small>
+                </div>
+                <div id="panel-qr" class="panel-pago d-none text-center">
+                    <div class="aviso text-start"><i class="ph ph-info" aria-hidden="true"></i> El pago por QR <b>no se verifica automáticamente</b>: el personal lo confirma en caja. Si eliges “Pagar después”, el QR se mantiene 15 minutos.</div>
+                    <div id="qrPago" class="qr-box"></div><small id="qrRef" class="codigo d-block mt-2"></small><small class="text-muted-k d-block">Escanea con la app de tu banco</small><button type="button" id="btnCopiarRef" class="btn btn-outline-light btn-sm mt-2"><i class="ph ph-copy" aria-hidden="true"></i> Copiar referencia</button>
+                </div>
+                <div id="panel-tarjeta" class="panel-pago d-none">
+                    <div class="aviso"><i class="ph ph-shield-check" aria-hidden="true"></i> Simulación segura: no se realiza ningún cobro real y no se guarda el número completo ni el CVV.</div>
+                    <div class="row g-3">
+                        <div class="col-12"><label for="tcNumero" class="form-label d-flex justify-content-between">Número de tarjeta <span id="tcMarca" class="marca-tc">Tarjeta</span></label><input type="text" id="tcNumero" class="form-control campo" inputmode="numeric" autocomplete="cc-number" placeholder="0000 0000 0000 0000" maxlength="19"></div>
+                        <div class="col-12"><label for="tcTitular" class="form-label">Titular</label><input type="text" id="tcTitular" class="form-control campo text-uppercase" autocomplete="cc-name" placeholder="COMO APARECE EN LA TARJETA" maxlength="40"></div>
+                        <div class="col-6"><label for="tcVence" class="form-label">Vence (MM/AA)</label><input type="text" id="tcVence" class="form-control campo" inputmode="numeric" autocomplete="cc-exp" placeholder="MM/AA" maxlength="5"></div>
+                        <div class="col-6"><label for="tcCvv" class="form-label">CVV</label><input type="password" id="tcCvv" class="form-control campo" inputmode="numeric" autocomplete="cc-csc" placeholder="123" maxlength="4"></div>
+                    </div>
+                    <div class="small text-muted-k mt-2">Tarjetas de prueba: <button type="button" class="btn btn-link btn-sm p-0 align-baseline js-demo-tarjeta" data-num="4242424242424242">Visa aprobada</button> · <button type="button" class="btn btn-link btn-sm p-0 align-baseline js-demo-tarjeta" data-num="4000000000000002">Visa rechazada</button> · <button type="button" class="btn btn-link btn-sm p-0 align-baseline js-demo-tarjeta" data-num="5555555555554444">Mastercard</button></div>
+                </div>
+
+                <div class="mt-3">
+                    <div id="pagoEdadBox" class="form-check mb-2 d-none"><input class="form-check-input" type="checkbox" id="chkEdad"><label class="form-check-label small" for="chkEdad">Confirmo que soy mayor de 18 años (tu pedido incluye alcohol).</label><div id="errEdad" class="text-danger small d-none" role="alert">Debes confirmar tu mayoría de edad.</div></div>
+                    <div class="form-check"><input class="form-check-input" type="checkbox" id="chkTerminos"><label class="form-check-label small" for="chkTerminos">Acepto la política de cancelación: reembolso total hasta 2 h antes del inicio; después, 50%.</label><div id="errTerminos" class="text-danger small d-none" role="alert">Debes aceptar la política para continuar.</div></div>
+                </div>
+                <div id="pagoError" class="alert alert-danger py-2 small mt-3 d-none" role="alert"></div>
+            </div>
+            <div class="modal-footer border-secondary flex-column align-items-stretch gap-2">
+                <button type="button" id="btnPagoConfirmar" class="btn btn-gradient py-3 fw-bold"></button>
+                <button type="button" id="btnPagoLuego" class="btn btn-outline-light d-none">Pagar después (se reserva 15 min)</button>
+            </div>
+            <div id="pagoProcesando" class="procesando d-none" role="status"><div class="spinner-border" aria-hidden="true"></div><p class="mb-0 mt-2">Procesando pago seguro...</p></div>
+        </div></div>
+    </div>
+
+    <!-- MODAL TICKET -->
+    <div class="modal fade" id="modalTicket" tabindex="-1" aria-labelledby="ticketTit" data-bs-backdrop="static" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable"><div class="modal-content text-dark p-0 border-0 rounded-4 overflow-hidden">
+            <h2 class="visually-hidden" id="ticketTit">Ticket de reserva</h2>
+            <div id="ticketVisual" class="ticket-papel"></div>
+            <div class="bg-dark p-2 d-flex flex-wrap gap-2">
+                <button type="button" class="btn btn-outline-light flex-fill" data-bs-dismiss="modal" id="btnCerrarTicket">Cerrar</button>
+                <button type="button" class="btn btn-success flex-fill d-none" id="btnYaPague"><i class="ph ph-qr-code" aria-hidden="true"></i> Ya pagué</button>
+                <button type="button" class="btn btn-outline-light flex-fill" id="btnImprimirTicket"><i class="ph ph-printer" aria-hidden="true"></i> Imprimir</button>
+                <button type="button" class="btn btn-outline-info flex-fill" id="btnWhatsApp"><i class="ph ph-whatsapp-logo" aria-hidden="true"></i> Compartir</button>
+                <button type="button" class="btn btn-gradient flex-fill fw-bold" id="btnDescargarPDF"><i class="ph ph-file-pdf" aria-hidden="true"></i> PDF</button>
+            </div>
+        </div></div>
+    </div>
+
+
+    <section class="container-fluid px-3 px-lg-4 py-3" aria-label="Avances académicos">
+      <div class="glass-card p-3 d-flex flex-wrap align-items-center justify-content-between gap-2">
+        <div><strong>Laboratorio de avances · Semana 3</strong><div class="small text-muted-k">Módulos independientes integrados al proyecto principal</div></div>
+        <div class="d-flex flex-wrap gap-2">
+          <a class="btn btn-sm btn-outline-light" href="avances/semana-3/Componentes-Encapsulamiento/index.html">Componentes</a>
+          <a class="btn btn-sm btn-outline-light" href="avances/semana-3/Mobile-First/index.html">Mobile First</a>
+          <a class="btn btn-sm btn-outline-light" href="avances/semana-3/Accesibilidad/index.html">Accesibilidad</a>
+          <a class="btn btn-sm btn-outline-light" href="avances/semana-3/MVP/index.html">MVP / Smoke test</a>
+        </div>
+      </div>
+    </section>
+
+    <noscript><p class="text-center text-warning p-4">Esta aplicación necesita JavaScript.</p></noscript>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
+    <!-- DOMPurify (local para que funcione offline) -->
+    <script src="assets/vendor/purify.min.js" defer></script>
+    <script type="module" src="js/core/main.js"></script>
+</body>
+</html>

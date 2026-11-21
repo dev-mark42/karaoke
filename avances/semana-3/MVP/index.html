@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avance Semana 5 | Smoke Testing y MVP</title>
+    <link rel="stylesheet" href="css/smoke-test.css">
+</head>
+<body>
+
+    <main class="container">
+        <header>
+            <h1>Auditoría Rápida (Smoke Test) - DOM</h1>
+            <p>Este módulo verifica en vivo que los componentes esenciales de tu página (imágenes, enlaces y botones) estén bien configurados antes de desplegar.</p>
+        </header>
+
+        <!-- Panel de Simulación de Auditoría -->
+        <section class="panel-auditoria" aria-labelledby="titulo-auditoria">
+            <h2 id="titulo-auditoria">Panel de Control de Calidad</h2>
+
+            <!-- Salida de texto con aria-live para accesibilidad -->
+            <div class="resultado" id="salidaAudit" aria-live="polite">
+                Estado: Listo para verificar.
+            </div>
+
+            <button type="button" id="btnSmokeTest" class="btn-primario">
+                Ejecutar Smoke Test DOM
+            </button>
+        </section>
+
+        <!-- Sección de prueba: Elementos que el script va a auditar -->
+        <section class="seccion-pruebas">
+            <h3>Elementos de Prueba</h3>
+
+            <div class="grid-pruebas">
+                <!-- 1. Imagen CON alt (Debería ser correcta) -->
+                <article class="card-prueba">
+                    <img src="https://images.unsplash.com/photo-1522778119026-d647f0596c20?q=80&w=400&fit=crop" alt="Estadio de fútbol lleno de gente" width="100%" height="150px" style="object-fit: cover;">
+                    <p>Imagen con atributo ALT correcto.</p>
+                </article>
+
+                <!-- 2. Imagen SIN alt (Debería ser detectada como error) -->
+                <article class="card-prueba">
+                    <img src="https://images.unsplash.com/photo-1518609878373-06d740f60d8b?q=80&w=400&fit=crop" width="100%" height="150px" style="object-fit: cover;">
+                    <p>Imagen sin atributo ALT (Error de accesibilidad).</p>
+                </article>
+
+                <!-- 3. Enlace correcto -->
+                <article class="card-prueba">
+                    <a href="https://github.com" target="_blank">Ir a GitHub</a>
+                    <p>Enlace con href correcto.</p>
+                </article>
+
+                <!-- 4. Enlace vacío (Debería ser detectado) -->
+                <article class="card-prueba">
+                    <a href="">Enlace vacío</a>
+                    <p>Enlace sin destino (href="").</p>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <script src="js/smoke-test.js"></script>
+</body>
+</html>

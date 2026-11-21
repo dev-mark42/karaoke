@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avance Semana 3 | Parte 2: Grid y Flexbox</title>
+    <link rel="stylesheet" href="css/layout.css">
+    <style>
+        body { font-family: 'Segoe UI', Arial, sans-serif; background: #0f0a1c; color: #fff; padding: 20px; margin: 0; }
+        header { border-bottom: 1px solid #444; padding-bottom: 1rem; margin-bottom: 1rem; }
+        .controles { margin-bottom: 20px; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Parte 2: Responsividad con Grid y Flexbox</h1>
+        <p>Redimensiona la ventana o usa el botón para simular la vista móvil.</p>
+    </header>
+
+    <div class="controles">
+        <button type="button" id="btnSimularVista" class="btn-simular" style="width: auto; padding: 10px 20px; background: #444; color: #fff; border: none; border-radius: 8px; cursor: pointer;">
+            Simular Vista Móvil / Escritorio
+        </button>
+    </div>
+
+    <div class="catalogo-grid" id="grid-catalogo">
+        <article class="card-item" data-id="101">
+            <div class="card-cuerpo">
+                <h3 class="card-item_titulo">Polera Real Madrid</h3>
+                <p class="card-item_estado">Estado: Disponible</p>
+                <p class="card-precio">Bs. 350</p>
+            </div>
+            <button type="button" class="btn-simular">Simular Selección</button>
+        </article>
+
+        <article class="card-item" data-id="102">
+            <div class="card-cuerpo">
+                <h3 class="card-item_titulo">Polera Barcelona</h3>
+                <p class="card-item_estado">Estado: Disponible</p>
+                <p class="card-precio">Bs. 340</p>
+            </div>
+            <button type="button" class="btn-simular">Simular Selección</button>
+        </article>
+
+        <article class="card-item" data-id="103">
+            <div class="card-cuerpo">
+                <h3 class="card-item_titulo">Polera Boca Juniors</h3>
+                <p class="card-item_estado">Estado: Disponible</p>
+                <p class="card-precio">Bs. 280</p>
+            </div>
+            <button type="button" class="btn-simular">Simular Selección</button>
+        </article>
+    </div>
+
+    <script src="js/layout.js"></script>
+</body>
+</html>
